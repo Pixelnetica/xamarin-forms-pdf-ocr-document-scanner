@@ -20,12 +20,12 @@ namespace XamarinFormsDemoApplication
         
         public ShellPage(MetaImage InitMetaImage)
         {
-            
             CreateMenuItems();
-
+            
+            
             _Record.LoadPreferencies();
-
-            if (InitMetaImage != null)
+            
+            /*if (InitMetaImage != null)
             {
                 Task.Run(() =>
                 {
@@ -34,7 +34,9 @@ namespace XamarinFormsDemoApplication
                         OpenImage("", InitMetaImage);
                     });
                 });
-            }
+            }*/
+
+            if(InitMetaImage!=null) OpenImage("", InitMetaImage);
 #if DEBUG2
             if (Device.RuntimePlatform == Device.Android)
             {
@@ -48,6 +50,30 @@ namespace XamarinFormsDemoApplication
                 });
             }
 #endif
+        }
+
+       
+        protected override bool OnBackButtonPressed()
+        {
+            if(_CropImageFormsView.Active)
+            {
+                _CropImageFormsView.Active = false;
+                return true;
+            }
+
+#if _USE_V3_
+            Task.Run(() =>
+            {
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    Xamarin.Forms.Application.Current.MainPage = new CameraMainPage();
+                });
+            });
+            return true;
+#else
+            return false;
+#endif
+
         }
 
         void StatusLog(string s)
@@ -126,7 +152,7 @@ namespace XamarinFormsDemoApplication
         ContentPage CreatePicturePage()
         {
             ContentPage resultPage = new ContentPage();
-
+            
             var mainLayout = new StackLayout() { VerticalOptions = LayoutOptions.FillAndExpand,HorizontalOptions= LayoutOptions.FillAndExpand };
             mainLayout.Spacing = 0;
             
@@ -186,7 +212,7 @@ namespace XamarinFormsDemoApplication
         bool _bSkipActveChanged = false;
         private void _CropImageFormsView_ActveChanged(object sender, EventArgs e)
         {
-            _TopLayout.IsVisible = _CropImageFormsView.Active;
+            Device.InvokeOnMainThreadAsync(() => _TopLayout.IsVisible = _CropImageFormsView.Active);
             if (!_CropImageFormsView.Active)
             {
                 if (!_bSkipActveChanged)
@@ -197,7 +223,7 @@ namespace XamarinFormsDemoApplication
         }
 
 
-        #region OpenImage
+#region OpenImage
         private async void OpenImage_ClickedAsync()
         {
             try
@@ -244,6 +270,8 @@ namespace XamarinFormsDemoApplication
             Task.Run(() =>
             {
                 _Record.OpenSourceImage(uri,source);                
+
+                
                 if(!string.IsNullOrEmpty(_Record.LastStateText))
                 {
 
@@ -252,13 +280,25 @@ namespace XamarinFormsDemoApplication
                         MyTools.MessageBox(_Record.LastStateText);
                     });
                 }
-                UpdateView(old != _Record.IsSourceImagePrssent,true,false);
+                
+                if(!_Record.DetectedDocumentCorners.IsInited)
+                {
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        CreateMenuItems();
+                    });
+                    DoCropImage(true);
+                }
+                else
+                {
+                    UpdateView(old != _Record.IsSourceImagePrssent, true, false);
+                }
             });
         }
 
-        #endregion OpenImage
+#endregion OpenImage
 
-        #region Crop
+#region Crop
 
         async void CropButton_Clicked()
         {
@@ -286,14 +326,14 @@ namespace XamarinFormsDemoApplication
                     _Record.OnCropImage(!source);
                 }
 
-                UpdateView(false, true,source);
+                UpdateView(false, true, source);
             });
         }
                 
-        #endregion
+#endregion
 
 
-        #region Save image
+#region Save image
         async void SaveButton_Clicked(bool needShare)
         {
             var page = new Popup.SaveDialogPage(this);
@@ -382,26 +422,31 @@ namespace XamarinFormsDemoApplication
         {
             DateTime updateTime = DateTime.UtcNow;
 
-            Device.BeginInvokeOnMainThread(() =>
+
+            if (needUpdateMenu)
             {
-                if (needUpdateMenu) CreateMenuItems();
-
-                //bool editMode = _Record.ImageMode == MainRecord.ImageState.Source;
-                if (needUpdateMetaImage)
+                Device.BeginInvokeOnMainThread(() =>
                 {
-                    _CropImageFormsView.UiSetMetaImage(_Record.DisplayBitmap, !editMode, _Record.DocumentCorners, _Record.DetectedDocumentCorners);
-                }
+                    CreateMenuItems();
+                });
+            }
 
-                _bSkipActveChanged = true;
-                //_CropImageFormsView.ActveChanged -= _CropImageFormsView_ActveChanged; //not update second time
-                _CropImageFormsView.Active = editMode;
-                _bSkipActveChanged = false;
-                //_CropImageFormsView.ActveChanged += _CropImageFormsView_ActveChanged;
+            //bool editMode = _Record.ImageMode == MainRecord.ImageState.Source;
+            if (needUpdateMetaImage)
+            {
+                _CropImageFormsView.UiSetMetaImage(_Record.DisplayBitmap, !editMode, _Record.DocumentCorners, _Record.DetectedDocumentCorners);
+            }
 
-                var now = DateTime.UtcNow;
-                StatusLog(string.Format("[{0}+{1}ms] {2}", (int)(now - _StartUtcTine).TotalMilliseconds,
-                    (int)(now - updateTime).TotalMilliseconds, _Record.LastStateText));
-            });
+            _bSkipActveChanged = true;
+            //_CropImageFormsView.ActveChanged -= _CropImageFormsView_ActveChanged; //not update second time
+            _CropImageFormsView.Active = editMode;
+            _bSkipActveChanged = false;
+            //_CropImageFormsView.ActveChanged += _CropImageFormsView_ActveChanged;
+
+            var now = DateTime.UtcNow;
+            StatusLog(string.Format("[{0}+{1}ms] {2}", (int)(now - _StartUtcTine).TotalMilliseconds,
+                (int)(now - updateTime).TotalMilliseconds, _Record.LastStateText));
+            //});
         }
 
         

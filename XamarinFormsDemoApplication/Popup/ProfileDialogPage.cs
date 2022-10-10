@@ -49,6 +49,8 @@ namespace XamarinFormsDemoApplication.Popup
 
         private void R_CheckedChanged(object sender, CheckedChangedEventArgs e)
         {
+            if (!e.Value) return ;
+
             string value = (string)((RadioButton)sender).Content;
             foreach(var p in Processing.Instance.Profiles)
             {

@@ -37,7 +37,7 @@ namespace XamarinFormsDemoApplication.Droid
         public override void OnBackPressed()
         {
             Rg.Plugins.Popup.Popup.SendBackPressed(base.OnBackPressed);
-            base.OnBackPressed();
+            //base.OnBackPressed();
         }
 
         protected override void OnResume()

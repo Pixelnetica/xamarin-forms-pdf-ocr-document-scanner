@@ -30,11 +30,19 @@ namespace XamarinFormsDemoApplication.Popup
             _Types.Add(ImageWriter.EImageFileType.Pdf, "PDF");
             _Types.Add(ImageWriter.EImageFileType.PdfPng, "PDF/PNG");
 
-            _PaperFormats.Add(ImageWriter.EPaperFormatConfigValues.Unknown, "Default");
-            _PaperFormats.Add(ImageWriter.EPaperFormatConfigValues.HalfLetter, "Predefined (half letter)");
-            _PaperFormats.Add(ImageWriter.EPaperFormatConfigValues.A5, "Custom (eq. A5)");
-            _PaperFormats.Add(ImageWriter.EPaperFormatConfigValues.Terminator, "Extensible");
-
+            _PaperFormats.Add(ImageWriter.EPaperFormatConfigValues.A4, "A4");
+            _PaperFormats.Add(ImageWriter.EPaperFormatConfigValues.A5, "A5");
+            _PaperFormats.Add(ImageWriter.EPaperFormatConfigValues.A6, "A6");
+            //_PaperFormats.Add(ImageWriter.EPaperFormatConfigValues.HalfLetter, "Predefined (half letter)");
+            //_PaperFormats.Add(ImageWriter.EPaperFormatConfigValues.Legal, "Legal)");
+            //_PaperFormats.Add(ImageWriter.EPaperFormatConfigValues.JuniorLegal, "Custom (eq. A5)");
+            //_PaperFormats.Add(ImageWriter.EPaperFormatConfigValues.Leger, "Leger");
+            _PaperFormats.Add(ImageWriter.EPaperFormatConfigValues.BusinessCard, "Business Card");
+            //_PaperFormats.Add(ImageWriter.EPaperFormatConfigValues.BusinessCard2, "BusinessCard2");
+            //_PaperFormats.Add(ImageWriter.EPaperFormatConfigValues.ReceiptMobile, "ReceiptMobile");
+            //_PaperFormats.Add(ImageWriter.EPaperFormatConfigValues.ReceiptStation, "ReceiptStation");
+            _PaperFormats.Add(ImageWriter.EPaperFormatConfigValues.ReceiptKitchen, "Receipt");
+            
 
             var m = new ScrollView() { VerticalOptions = LayoutOptions.Center, HorizontalOptions = LayoutOptions.Center };
             var f = new Frame();

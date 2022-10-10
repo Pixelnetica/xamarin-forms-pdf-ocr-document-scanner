@@ -99,9 +99,16 @@ namespace XamarinFormsDemoApplication
                             {
                                 MetaImage.SafeRecycleBitmap(croppedImage, targetImage);
                             }
-                            GC.Collect();
+                            
+                            //if(result.Image!=null)
+                            //{
+                            //    MetaImage.SafeRecycleBitmap(result.Image, targetImage);
+                            //}
 
                             result.Image = targetImage;
+
+                            GC.Collect();
+
                             result.StrongShadows = inputParams.StrongShadows;
                             result.Corners = null;
                             result.Processing = inputParams.Processing;

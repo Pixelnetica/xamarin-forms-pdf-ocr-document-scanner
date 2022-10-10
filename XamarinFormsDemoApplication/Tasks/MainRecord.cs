@@ -85,14 +85,14 @@ namespace XamarinFormsDemoApplication
             // Reset Source
             imageMode = ImageState.InitNothing;
             sourceImageUri = null;
-            MetaImage.SafeRecycleBitmap(sourceImage, null);
+            if(sourceImage!=null) sourceImage.Dispose();
             sourceImage = null;
-            initCorners = userCorners = null;
-
-            // Reset target
-            MetaImage.SafeRecycleBitmap(targetImage, null);
+            if(targetImage!=null) targetImage.Dispose();
             targetImage = null;
 
+            initCorners = userCorners = null;
+
+            
             // Reset messages
             LastStateText = "";
                         

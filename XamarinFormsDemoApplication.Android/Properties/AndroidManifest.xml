@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="2060400" android:versionName="2.6.4.0" package="com.pixelnetica.dssdk.forms.demo" android:installLocation="auto">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="2060500" android:versionName="2.6.5" package="com.pixelnetica.dssdk.forms.demo" android:installLocation="auto">
 	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="30" />
 	<application android:label="DocScan SDK Xamarin Forms"> android:requestLegacyExternalStorage="true" </application>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
