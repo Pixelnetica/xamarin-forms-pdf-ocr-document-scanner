@@ -14,10 +14,14 @@ namespace XamarinFormsDemoApplication.Popup
         public MyCheckBox(string text,bool value)
         {
             Orientation = StackOrientation.Horizontal;
-            Children.Add(_CB = new CheckBox() { IsChecked = value, VerticalOptions = LayoutOptions.FillAndExpand });
-            var l = new Label() { Text = text, VerticalOptions = LayoutOptions.Center };
+            Children.Add(_CB = new CheckBox() { IsChecked = value, VerticalOptions = LayoutOptions.Center });
+            var l = new Label() { Text = text, VerticalOptions = LayoutOptions.Center, VerticalTextAlignment = TextAlignment.Center };
             l.GestureRecognizers.Add(new TapGestureRecognizer() { Command = new Command(() => { _CB.IsChecked = !_CB.IsChecked; }) });
             Children.Add(l);
+
+            l.TextColor= Popup.MyBaseDialogPage.MenuFontColor;
+            l.FontSize = Popup.MyBaseDialogPage.MenuFontSize;
+            l.HeightRequest= Popup.MyBaseDialogPage.MenuItemHeight;
 
             _CB.CheckedChanged += _CB_CheckedChanged;
         }

@@ -5,6 +5,24 @@ using Android.Content.PM;
 using Android.Runtime;
 using Android.OS;
 using AndroidX.AppCompat.App;
+using Android.Graphics;
+using Android.Graphics.Drawables;
+
+//namespace AndroidX.AppCompat.Graphics.Drawable
+//{
+//    class DrawableWrapper
+//    {
+//        public DrawableWrapper(Android.Graphics.Drawables.Drawable dr)
+//        {
+//        }
+
+//        public virtual void Draw(Canvas canvas)
+//        {
+            
+//        }
+//    }
+
+//}
 
 namespace XamarinFormsDemoApplication.Droid
 {
@@ -14,10 +32,10 @@ namespace XamarinFormsDemoApplication.Droid
     {
         
         protected override void OnCreate(Bundle savedInstanceState)
-        {
+        {            
             AppCompatDelegate.DefaultNightMode = AppCompatDelegate.ModeNightNo;
             base.OnCreate(savedInstanceState);
-
+                        
             Rg.Plugins.Popup.Popup.Init(this);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);

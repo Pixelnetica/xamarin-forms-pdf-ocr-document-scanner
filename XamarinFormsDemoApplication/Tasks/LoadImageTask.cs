@@ -52,8 +52,7 @@ namespace XamarinFormsDemoApplication
                     //// Free source image
                     MetaImage.SafeRecycleBitmap(sourceImage, originImage);
 
-                    bool bDocumentAreaChecked, bDocumentDistortionChecked;
-                    Corners corners = sdk.DetectDocumentCorners(originImage, false, out bDocumentAreaChecked, out bDocumentDistortionChecked);
+                    Corners corners = sdk.DetectDocumentCorners(originImage);
                     
                     // Free memory
                     GC.Collect();

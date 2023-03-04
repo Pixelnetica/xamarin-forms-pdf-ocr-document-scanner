@@ -4,7 +4,7 @@ using System.Text;
 
 namespace XamarinFormsDemoApplication
 {
-    internal class MyTools
+    public class MyTools
     {
         public static void Log(string s)
         {

@@ -15,6 +15,7 @@ namespace XamarinFormsDemoApplication
             public ImageWriter.EImageFileType writerType;
             public ImageWriter.EPaperFormatConfigValues paperFormat;
             public bool multiPages;
+            public int CustomPageWidth, CustomPageHeight;
 
             public Params() { }
         }
@@ -78,9 +79,21 @@ namespace XamarinFormsDemoApplication
                         case ImageWriter.EImageFileType.PdfPng:
                         case ImageWriter.EImageFileType.Pdf:
                             maxPages = 3;
-                            writer.Configure(ImageWriter.EConfigParam.Paper, input.paperFormat);
-                            writer.Configure(ImageWriter.EConfigParam.Units, ImageWriter.EUnitsConfigValues.Inches);
-                            //writer.Configure(ImageWriter.EConfigParam.FooterHeight, 25);
+
+                            if (input.paperFormat == ImageWriter.EPaperFormatConfigValues.Terminator)
+                            {
+                                //units before size
+                                writer.Configure(ImageWriter.EConfigParam.Units, ImageWriter.EUnitsConfigValues.Millimeters);
+                                writer.Configure(ImageWriter.EConfigParam.PageWidth, input.CustomPageWidth);
+                                writer.Configure(ImageWriter.EConfigParam.PageHeight, input.CustomPageHeight);                                
+                            }
+                            else
+                            {
+                                writer.Configure(ImageWriter.EConfigParam.Paper, input.paperFormat);
+                                
+                            }
+                            
+                            writer.Configure(ImageWriter.EConfigParam.FooterHeight, 10);
                             //writer.Configure(ImageWriter.EConfigParam.FooterText, "Test");
                             break;
 
@@ -110,7 +123,7 @@ namespace XamarinFormsDemoApplication
                                 }
                             }
                                                         
-                            var filePath2=writer.WriteFile(pngFileName, ImageWriter.EImageFileType.Png, input.image.ExifOrientation);
+                            var filePath2=writer.WriteFile(pngFileName, ImageWriter.EPngPdfImageFileType.Png, input.image.ExifOrientation);
                         }
                         else
                         {

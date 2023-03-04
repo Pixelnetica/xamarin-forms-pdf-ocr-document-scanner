@@ -1,9 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="2060500" android:versionName="2.6.5" package="com.pixelnetica.dssdk.forms.demo" android:installLocation="auto">
-	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="30" />
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="3000505" android:versionName="3.0.5.5" package="com.pixelnetica.dssdk.forms.demo" android:installLocation="auto">
+	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="31" />
 	<application android:label="DocScan SDK Xamarin Forms"> android:requestLegacyExternalStorage="true" </application>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 	<uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.CAMERA" />
+	<uses-permission android:name="android.permission.FLASHLIGHT" />
 </manifest>

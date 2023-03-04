@@ -10,6 +10,7 @@ namespace XamarinFormsDemoApplication.Popup
         public AboutDialogPage()
         {
             this.ControlTemplate = null;
+            
 
             string appname;
             string pkgName = Xamarin.Essentials.AppInfo.PackageName;

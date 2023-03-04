@@ -48,7 +48,7 @@ namespace XamarinFormsDemoApplication
                 using (ImageProcessing sdk = new ImageProcessing())
                 {
                     // Crop image
-                    inputParams.Image.StrongShadows = inputParams.StrongShadows;
+                    
                     MetaImage croppedImage;
                     if ((inputParams.Corners != null)&&(inputParams.bNeedCrop))// Processing!=EProcessing.Source))
                     {
@@ -59,6 +59,7 @@ namespace XamarinFormsDemoApplication
                         // Corners wasn't defined
                         croppedImage = inputParams.Image;
                     }
+
                     if (croppedImage == null)
                     {
                         // Something wrong
@@ -66,6 +67,8 @@ namespace XamarinFormsDemoApplication
                     }
                     else
                     {
+                        croppedImage.StrongShadows = inputParams.StrongShadows;
+
                         // Process
                         MetaImage targetImage = null;
                         switch (inputParams.Processing)

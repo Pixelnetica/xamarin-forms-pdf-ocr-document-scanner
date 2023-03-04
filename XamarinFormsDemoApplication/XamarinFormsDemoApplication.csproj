@@ -24,19 +24,12 @@
     <None Remove="Pixelnetica.DocScanSDK.Xamarin.Forms" />
   </ItemGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\ic_action_accept.png" />
-    <EmbeddedResource Include="Resources\ic_action_rotate_left.png" />
-    <EmbeddedResource Include="Resources\ic_action_rotate_right.png" />
-    <EmbeddedResource Include="Resources\ic_action_select_all.png" />
-    <EmbeddedResource Include="Resources\ic_action_view_as_grid.png" />
-  </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Pixelnetica.DocScanSDK.Xamarin.Forms" Version="3.0.5.5" />
     <PackageReference Include="Rg.Plugins.Popup" Version="2.1.0" />
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2515" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.7.3" />
-    <PackageReference Include="Pixelnetica.DocScanSDK.Xamarin.Forms" Version="2.6.5" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2545" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.7.5" />
   </ItemGroup>
 
   <ItemGroup>
@@ -44,9 +37,8 @@
       <SubType>Code</SubType>
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
-    <Compile Update="ShellPage.xaml.cs">
+    <Compile Update="CameraMainPage.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
-      <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
 

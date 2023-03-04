@@ -8,8 +8,9 @@ namespace XamarinFormsDemoApplication
     public partial class App : Application
     {
         public App()
-        {          
-            MainPage = new ShellPage(null);
+        {
+            //MainPage = new CameraMainPage();
+            MainPage = new MainPage(null);
         }
 
         protected override void OnStart()

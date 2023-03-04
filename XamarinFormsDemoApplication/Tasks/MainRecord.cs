@@ -22,6 +22,7 @@ namespace XamarinFormsDemoApplication
         
         string sourceImageUri;
         MetaImage sourceImage=null;  // Store source to 
+        public MetaImage SourceImage { get => sourceImage; }
         public bool IsSourceImagePrssent { get { return sourceImage != null; } }
 
         Corners initCorners;    // Corners detected by SDK
@@ -37,6 +38,8 @@ namespace XamarinFormsDemoApplication
         const string PREFS_MULTI_PAGES = "MULTI_PAGES";
         const string PREFS_PAPER_FORMAT = "PAPER_FORMAT";
         const string PREFS_LastProcessingMode = "LastProcessingMode";
+        const string PREFS_CustomPageWidth = "PageWidth";
+        const string PREFS_CustomPageHeight = "PageHeight";
 
         bool strongShadows;
         ImageWriter.EImageFileType writerType;
@@ -237,6 +240,10 @@ namespace XamarinFormsDemoApplication
             multiPages = Preferences.Get(PREFS_MULTI_PAGES, multiPages);
             _LastProcessingMode = (EProcessing)Preferences.Get(PREFS_LastProcessingMode, (int)_LastProcessingMode);
             paperFormat = (ImageWriter.EPaperFormatConfigValues)Preferences.Get(PREFS_PAPER_FORMAT, (int)paperFormat);
+
+            _CustomPageWidth = Preferences.Get(PREFS_CustomPageWidth, 200);
+            _CustomPageHeight =Preferences.Get(PREFS_CustomPageHeight, 100);
+            
         }
 
 
@@ -302,5 +309,34 @@ namespace XamarinFormsDemoApplication
                 }
             }
         }
+
+        int _CustomPageWidth = 200;
+        public int CustomPageWidth
+        {
+            get => _CustomPageWidth;
+            set
+            {
+                if (value != _CustomPageWidth)
+                { 
+                    _CustomPageWidth= value;
+                    Preferences.Set(PREFS_CustomPageWidth, value);
+                }
+            }
+        }
+
+        int _CustomPageHeight = 200;
+        public int CustomPageHeight
+        {
+            get => _CustomPageHeight;
+            set
+            {
+                if (value != _CustomPageHeight)
+                {
+                    _CustomPageHeight = value;
+                    Preferences.Set(PREFS_CustomPageHeight, value);
+                }
+            }
+        }
+
     }
 }
